@@ -115,5 +115,4 @@ class ControleImagem {
         $this->sessao = $sessao;
     }
 
-//put your code here
 }

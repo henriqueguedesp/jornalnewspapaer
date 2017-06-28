@@ -105,12 +105,6 @@ class ControleJornalista {
         $jornalista->setTipo($this->request->get('tipo'));
         $modelo = new ModeloJornalista();
         $id = $modelo->cadastrarJornalista($jornalista);
-        /*$comando = "mkdir uploads/";
-        $comando .= $id;
-        print_r($comando);
-        $language = shell_exec($comando);
-         * 
-         */
         mkdir("uploads/".$id,0777,true);
         echo "<script> alert('Jornalista cadastrado com sucesso!'); "
         . " location.href='/';</script>";

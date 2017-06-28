@@ -143,8 +143,6 @@ $rotas->add('salvarEdicao', new Route('/salvarEdicao/{_param}', array('_controll
 
 $rotas->add('deletarNoticia', new Route('/deletarNoticia/{_param}', array('_controller' =>
     'Newspaper\Controllers\ControleNoticia', '_method' => 'deletarNoticia')));
-/// ROTAS PARA ADMINISTRAÇÃO DE FUNÇÕES DO SISTEMA
-////JORNALISTAS
 
 
 
@@ -154,7 +152,6 @@ $rotas->add('novoJornalista', new Route('/novoJornalista', array('_controller' =
 $rotas->add('listarJornalistas', new Route('/listarJornalistas', array('_controller' =>
     'Newspaper\Controllers\ControleJornalista', '_method' => 'listarJornalistas')));
 
-///NOTICIAS
 
 $rotas->add('novaNoticia', new Route('/novaNoticia', array('_controller' =>
     'Newspaper\Controllers\ControleNoticia',

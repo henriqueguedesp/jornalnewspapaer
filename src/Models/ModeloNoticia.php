@@ -104,11 +104,11 @@ class ModeloNoticia {
         }
     }
 
-    public function noticiasEspecificas($id) {
+    public function noticiasEspecificas($cat) {
         try {
             $sql = "select * from noticias as n,categorias as c,jornalistas as j, capas as cp where  n.idCategoria = c.idCategoria and n.idJornalista = j.idJornalista and  n.idCapa  = cp.idCapa and c.descricao = :idCat and n.status = 1 order by n.dataPublicacao desc";
             $p_sql = Conexao::getInstance()->prepare($sql);
-            $p_sql->bindValue(':idCat', $id);
+            $p_sql->bindValue(':idCat', $cat);
             $p_sql->execute();
             return $p_sql->fetchAll(PDO::FETCH_OBJ);
         } catch (Exception $ex) {

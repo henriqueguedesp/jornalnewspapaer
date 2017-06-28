@@ -17,8 +17,6 @@ class ControleNoticia {
     private $request;
     private $sessao;
 
-    //private $cookie ;
-
     function __construct(Response $response, \Twig_Environment $twig, \Symfony\Component\HttpFoundation\Request $request, Sessao $sessao) {
         $this->response = $response;
         $this->twig = $twig;
@@ -84,15 +82,14 @@ class ControleNoticia {
         $news->setTexto($this->request->get('texto'));
         $news->setTitulo($this->request->get('titulo'));
         $news->setId($id);
-        $nao = $this->request->get('nao');
-        $sim = $this->request->get('sim');
         $modelo = new ModeloNoticia();
+        $opcao = $this->request->get("opcao");
         if (isset($capa)) {
             $id = $modelo->editarNoticia($news, $capa);
             echo "<script> alert('Noticia atualizada com sucesso!'); "
             . " location.href='/listarNoticias';</script>";
         } else {
-            if ($sim) {
+            if ($opcao == 'sim') {
                 $id = $modelo->editarNoticiaSemCapa($news);
                 echo "<script> alert('Noticia atualizada com sucesso!');"
                 . " location.href='/listarNoticias';</script>";
@@ -101,6 +98,7 @@ class ControleNoticia {
                 echo "<script> alert('Noticia atualizada com sucesso!');"
                 . " location.href='/listarNoticias';</script>";
             }
+           
         }
     }
 

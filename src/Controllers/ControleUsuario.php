@@ -6,6 +6,7 @@ use Newspaper\Models\ModeloUsuario;
 use Newspaper\Models\ModeloJornalista;
 use Symfony\Component\HttpFoundation\Response;
 use Newspaper\Util\Sessao;
+use Newspaper\Entity\Jornalista;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class ControleUsuario {
@@ -32,7 +33,7 @@ class ControleUsuario {
                 $ultimo = $modelo->ultimoId();
                 if ($ultimo == null) {
                     $ultimo = 1;
-                    $adm = new \Newspaper\Entity\Jornalista();
+                    $adm = new Jornalista();
                     $adm->setEmail($ultimo);
                     $adm->setNome($ultimo);
                     $adm->setSenha($ultimo);
@@ -47,10 +48,10 @@ class ControleUsuario {
                     $adm->setSenha($ultimo->idJornalista);
                     $adm->setTipo(1);
                     $modelo->cadastrarJornalista($adm);
-                    mkdir("uploads/" . $ultimo->idJornalista++, 0777, true);
+                    mkdir("uploads/" . $ultimo->idJornalista, 0777, true);
                 }
-                  return $this->response->setContent($this->twig->render('TemplateAdministradorAdcionado.html.twig', array('adm' => $adm
-                  ))); 
+                return $this->response->setContent($this->twig->render('TemplateAdministradorAdcionado.html.twig', array('adm' => $adm
+                )));
             } else {
                 return $this->response->setContent($this->twig->render('TemplateComAdministrador.html.twig'));
             }
@@ -78,19 +79,10 @@ class ControleUsuario {
     public function validaLogin() {
         $modelo = new ModeloUsuario();
         $usuario = $modelo->validaLogin($this->request->get('email'), $this->request->get('senha'));
-        /* if ($usuario) {
-          $this->sessao->add("usuario", $usuario);
-          $this->redireciona("/");
-          } else {
-          echo "<script> alert('Usuario ou senha digitados estão incorretos!'); "
-          . " location.href='/login';</script>";
-          } */
-
         if ($usuario) {
             $this->sessao->add("usuario", $usuario);
             echo 1;
         } else {
-
             echo 0;
         }
     }
